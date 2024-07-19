@@ -1,0 +1,62 @@
+// Initialize an empty array to hold products
+let products = [];
+
+class Product {
+  constructor(prodId, prodName, prodCtgry, prodDesc, prodStock, prodPrice) {
+    this.prodId = prodId;
+    this.prodName = prodName;
+    this.prodCtgry = prodCtgry;
+    this.prodDesc = prodDesc;
+    this.prodStock = prodStock;
+    this.prodPrice = prodPrice;
+  }
+
+  // Method to add product to the products array
+  productAdd() {
+    products.push(this);
+  }
+
+  // Method to delete product from the products array
+  productDelete() {
+    products = products.filter((product) => product.prodId !== this.prodId);
+  }
+}
+
+// Controller function to handle adding a new product
+function addNewProduct(
+  prodId,
+  prodName,
+  prodCtgry,
+  prodDesc,
+  prodStock,
+  prodPrice
+) {
+  const newProduct = new Product(
+    prodId,
+    prodName,
+    prodCtgry,
+    prodDesc,
+    prodStock,
+    prodPrice
+  );
+  newProduct.productAdd();
+}
+
+// Controller function to handle deleting a product
+function deleteProduct(prodId) {
+  const product = products.find((product) => product.prodId === prodId);
+  if (product) {
+    product.productDelete();
+  }
+}
+
+// Simulate user adding products
+addNewProduct(1, "10mm", "steel-rod", "corrugated", 100, 150);
+addNewProduct(2, "20mm", "steel-rod", "smooth", 200, 250);
+
+console.log(products); // Before deletion
+
+// Simulate user deleting a product
+deleteProduct(1);
+
+console.log(products); // After deletion
